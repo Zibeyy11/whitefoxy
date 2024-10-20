@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Night Fox</title>
+    <style>
+        /* 设置黑底白字的样式 */
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        /* 隐藏内容部分 */
+        #content {
+            display: none;
+        }
+
+        /* 按钮样式 */
+        .arrow-button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* 鼠标悬浮按钮时 */
+        .arrow-button:hover {
+            background-color: gray;
+        }
+    </style>
+    <script>
+        // 点击按钮后显示原先的内容
+        function showContent() {
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }
+
+        // 检查输入并播放BGM
+        function checkInput() {
+            const input = document.getElementById("userInput").value;
+            const correctValue = "3676fd5b497a6ae3b589d8d566a73ce9cae8509e7aedab6f2c86fa3b9644d080";
+            const bgm = document.getElementById("bgm"); // 获取音频元素
+            
+            if (input === correctValue) {
+                document.getElementById("result").innerText = "Good night, fox";
+                bgm.play();  // 播放背景音乐
+            } else {
+                document.getElementById("result").innerText = "睡不着拉倒";
+            }
+        }
+
+        // 监听回车键按下时调用 checkInput()
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                checkInput();  // 当按下回车键时，触发提交按钮的行为
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- 初始显示的部分 -->
+    <div id="intro">
+        <h1>还不睡吗？</h1>
+        <button class="arrow-button" onclick="showContent()">→</button>
+    </div>
+
+    <!-- 点击按钮后显示的部分 -->
+    <div id="content">
+        <h1>Enter the data</h1>
+        <input type="text" id="userInput" placeholder="Enter your data" onkeypress="handleKeyPress(event)">
+        <button class="arrow-button" onclick="checkInput()">Submit</button>
+        <p id="result"></p>
+    </div>
+
+    <!-- 添加BGM音频 -->
+    <audio id="bgm" src="MonaLisa.mp3" preload="auto"></audio>
+</body>
+</html>
